@@ -3,6 +3,29 @@ public class AssignmentTask7 {
     //SUBMIT ONLY THIS METHOD
     public static void rangeMove(DNode dh, int start, int end) {
         // TO DO
+
+        DNode present = dh;
+        DNode last = dh.prev;
+
+        while (present != last) {
+//            System.out.println(present.next.elem);   // To check
+            int num = (int) present.next.elem;
+            if (num >= start && num <= end) {
+
+                DNode temp = present.next;
+
+                present.next = temp.next;
+                temp.next.prev = present;
+
+                dh.prev.next = temp;
+                temp.prev = dh.prev;
+                temp.next = dh;
+                dh.prev = temp;
+            } else {                    // Not shifting present to next node right away cuz there could be two consecutive elems within the range. So after removing first num node re-enter the loop to check again.
+                present = present.next;
+            }
+
+        }
     }
 
     //DO NOT SUBMIT THE DRIVER CODE BELOW
